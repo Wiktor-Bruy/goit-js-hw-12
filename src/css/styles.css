@@ -122,6 +122,7 @@ img {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
+  margin-bottom: 32px;
 }
 .gallery-item {
   flex-basis: calc((100% - 48px) / 3);
@@ -152,6 +153,8 @@ img {
   text-align: center;
 }
 .btn-more {
+  margin: 0 auto;
+  border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -165,6 +168,10 @@ img {
   letter-spacing: 0.04em;
   color: #fff;
   transition: background-color 250ms ease-in-out;
+  display: none;
+}
+.btn-more.viseble {
+  display: flex;
 }
 .btn-more:focus,
 .btn-more:hover {

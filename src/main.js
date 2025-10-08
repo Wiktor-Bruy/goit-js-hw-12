@@ -10,6 +10,8 @@ import 'izitoast/dist/css/iziToast.min.css';
 import * as galleryMethods from './js/render-functions';
 import getImagesByQuery from './js/pixabay-api';
 
+// Оголошення глобальних змінних
+
 // Обробка сабміту форми
 
 const form = document.querySelector('.form');

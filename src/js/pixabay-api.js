@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function getImagesByQuery(query) {
+export default function getImagesByQuery(query, page) {
   // Створення параметрів запиту
 
   const searchParams = new URLSearchParams({
@@ -9,7 +9,8 @@ export default function getImagesByQuery(query) {
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
-    per_page: 9,
+    per_page: 15,
+    page: page,
   });
 
   //Відправка запиту
