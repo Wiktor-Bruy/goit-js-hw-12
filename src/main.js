@@ -11,6 +11,7 @@ import * as galleryMethods from './js/render-functions';
 import getImagesByQuery from './js/pixabay-api';
 
 // Оголошення глобальних змінних
+let page = 1;
 
 // Обробка сабміту форми
 
@@ -24,14 +25,14 @@ function startSearch(event) {
     // Запит та обробка його результату
 
     galleryMethods.showLoader(); // Показ індикатора завандаження
-    getImagesByQuery(searchWords)
+    getImagesByQuery(searchWords, page)
       .then(value => {
         // Обробка результату відповіді
 
         galleryMethods.hideLoader(); // Приховуємо індикатор завантаження
-        // Виводимо всовіщення про невдалий пошук
 
         if (value.length === 0) {
+          // Виводимо совіщення про невдалий пошук
           galleryMethods.clearGallery();
           iziToast.warning({
             message:
@@ -43,7 +44,7 @@ function startSearch(event) {
           });
         } else {
           galleryMethods.clearGallery();
-          galleryMethods.createGallery(value);
+          galleryBox = galleryMethods.createGallery(value);
         }
       })
       .catch(error => {

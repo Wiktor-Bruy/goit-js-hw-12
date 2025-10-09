@@ -3,7 +3,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 // Функція створення та додавання розмітки галереї
 
-export function createGallery(images) {
+export function createGallery(images, isGalleryBox) {
   const gallery = document.querySelector('.gallery');
 
   let galleryArr = [];
@@ -67,6 +67,7 @@ export function createGallery(images) {
     captionsData: 'alt',
     captionDelay: 250,
   };
+
   let galleryBox = new SimpleLightbox('.gallery li a', settings);
   galleryBox.refresh();
 }
