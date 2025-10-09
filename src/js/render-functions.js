@@ -1,9 +1,6 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 // Функція створення та додавання розмітки галереї
 
-export function createGallery(images, isGalleryBox) {
+export function createGallery(images) {
   const gallery = document.querySelector('.gallery');
 
   let galleryArr = [];
@@ -22,6 +19,7 @@ export function createGallery(images, isGalleryBox) {
       item.classList.add('gallery-item');
 
       const link = document.createElement('a');
+      item.classList.add('gallery-item-link');
       link.setAttribute('href', largeImageURL);
       item.append(link);
 
@@ -62,14 +60,6 @@ export function createGallery(images, isGalleryBox) {
   );
 
   gallery.append(...galleryArr);
-
-  const settings = {
-    captionsData: 'alt',
-    captionDelay: 250,
-  };
-
-  let galleryBox = new SimpleLightbox('.gallery li a', settings);
-  galleryBox.refresh();
 }
 
 // Очищення галереї
@@ -93,4 +83,18 @@ export function showLoader() {
 export function hideLoader() {
   const loading = document.querySelector('.loader');
   loading.classList.toggle('visible');
+}
+
+// Показуємо кнопку
+export function showLoadMoreButton() {
+  const btnMore = document.querySelector('.btn-more');
+  if (!btnMore.classList.contains('viseble')) {
+    btnMore.classList.add('viseble');
+  }
+}
+
+// Приховуємо кнопку
+export function hideLoadMoreButton() {
+  const btnMore = document.querySelector('.btn-more');
+  btnMore.classList.remove('viseble');
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function getImagesByQuery(query, page) {
+export default async function getImagesByQuery(query, page) {
   // Створення параметрів запиту
 
   const searchParams = new URLSearchParams({
@@ -14,8 +14,13 @@ export default function getImagesByQuery(query, page) {
   });
 
   //Відправка запиту
-  return axios
-    .get(`https://pixabay.com/api/?${searchParams}`)
-    .then(response => response.data.hits)
-    .catch(error => error);
+  try {
+    const answer = await axios.get(`https://pixabay.com/api/?${searchParams}`);
+    return {
+      images: answer.data.hits,
+      total: answer.data.total,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
