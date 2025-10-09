@@ -42,6 +42,7 @@ function startSearch(event) {
       galleryMethods.hideLoader(); // Приховуємо індикатор завантаження
 
       if (value.images.length === 0) {
+        pageView.classList.remove('visible');
         // Виводимо совіщення про невдалий пошук
         galleryMethods.clearGallery();
         galleryMethods.hideLoadMoreButton();
@@ -72,7 +73,7 @@ function startSearch(event) {
         if (pageCounter < totaPage) {
           galleryMethods.showLoadMoreButton();
           pageView.classList.add('visible');
-          pageView.textContent = `1...${totaPage}`;
+          pageView.textContent = `1 --- ${totaPage}`;
         } else {
           iziToast.info({
             message:
