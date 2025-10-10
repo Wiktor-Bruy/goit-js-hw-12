@@ -1,4 +1,10 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 // Функція створення та додавання розмітки галереї
+
+let galleryBox;
+let isGalleryBox = false;
 
 export function createGallery(images) {
   const gallery = document.querySelector('.gallery');
@@ -60,6 +66,17 @@ export function createGallery(images) {
   );
 
   gallery.append(...galleryArr);
+
+  if (isGalleryBox) {
+    galleryBox.refresh();
+  } else {
+    const settings = {
+      captionsData: 'alt',
+      captionDelay: 250,
+    };
+    galleryBox = new SimpleLightbox('.gallery li a', settings);
+    isGalleryBox = true;
+  }
 }
 
 // Очищення галереї

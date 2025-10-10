@@ -2,8 +2,6 @@
 
 // Імпорти бібліотек
 
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -14,8 +12,6 @@ import getImagesByQuery from './js/pixabay-api';
 
 // Оголошення глобальних змінних
 let pageCounter = 1;
-let isGalleryBox = false;
-let galleryBox;
 let searchWords;
 let totaPage;
 const pageView = document.querySelector('.page-counter');
@@ -55,19 +51,9 @@ function startSearch(event) {
           position: 'center',
         });
       } else {
-        totaPage = Math.floor(value.total / 15);
+        totaPage = Math.ceil(value.total / 15);
         galleryMethods.clearGallery();
         galleryMethods.createGallery(value.images);
-        if (!isGalleryBox) {
-          const settings = {
-            captionsData: 'alt',
-            captionDelay: 250,
-          };
-          galleryBox = new SimpleLightbox('.gallery li a', settings);
-          isGalleryBox = true;
-        } else {
-          galleryBox.refresh();
-        }
 
         // Якщо сторінок більше 1, показуємо кнопку
         if (pageCounter < totaPage) {
@@ -83,6 +69,8 @@ function startSearch(event) {
             theme: 'dark',
             position: 'topRight',
           });
+          pageView.classList.remove('visible');
+          galleryMethods.hideLoadMoreButton();
         }
       }
     });
@@ -109,7 +97,6 @@ function loadMore() {
   const scrolH = window.innerHeight;
   getImagesByQuery(searchWords, pageCounter).then(value => {
     galleryMethods.createGallery(value.images);
-    galleryBox.refresh();
     window.scrollBy({
       top: scrolH,
       left: 0,
